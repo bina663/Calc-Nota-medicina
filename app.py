@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, request, redirect, session, flash, render_template
+
 import sqlite3
 
 app = Flask(__name__)
@@ -27,7 +28,8 @@ def login():
             session["username"] = username
             return redirect("/calculadora")
         else:
-            return "Login inválido!"
+            flash("Usuário ou senha inválidos!")
+            return redirect("/")
 
     return render_template("login.html")
 
